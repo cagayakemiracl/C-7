@@ -39,8 +39,8 @@ int main(argc, argv)
 	print_bits(lrotate(num, bit));
 
 	CATCH(NOT_NUM, END) {
-			puts("You should enter a number!!");
-			return 1;
+		puts("You should enter a number!!");
+		return 1;
 	}
 	
 	FINALLY(END) { }
