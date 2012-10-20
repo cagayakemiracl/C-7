@@ -18,6 +18,8 @@ void print_bits();
 unsigned set();
 unsigned reset();
 unsigned inverse();
+
+/* LLVM-Compiler では正しく動かない。 */
 unsigned set_n();
 unsigned reset_n();
 unsigned inverse_n();
@@ -56,7 +58,7 @@ int main(argc, argv)
 }
 
 int unsigned_scanf(p)
-	const unsigned *p;
+	unsigned *p;
 {
 	const int check = scanf("%u", p);
 	while (getchar() != '\n')
@@ -65,7 +67,7 @@ int unsigned_scanf(p)
 }
 
 int int_scanf(p)
-	const unsigned *p;
+	int *p;
 {
 	const int check = scanf("%d", p);
 	while (getchar() != '\n')
@@ -101,21 +103,27 @@ unsigned set(x, pos)
 	const unsigned x;
 	int pos;
 {
-	return x | 1 << --pos;
+	/* LLVM-Compiler
+	   return x | 1 << --pos; */
+	return x | 1 << pos;
 }
 
 unsigned reset(x, pos)
 	const unsigned x;
 	int pos;
 {
-	return set(x, pos) ^ 1 << --pos;
+	/* LLVM-Compiler
+	   return set(x, pos) ^ 1 << --pos; */
+	return set(x, pos) ^ 1 << pos;
 }
 
 unsigned inverse(x, pos)
 	const unsigned x;
 	int pos;
 {
-	return x ^ 1 << --pos;
+	/* LLVM-Compiler
+	   return x ^ 1 << --pos; */
+	return x ^ 1 << pos;
 }
 
 unsigned set_n(x, pos, n)

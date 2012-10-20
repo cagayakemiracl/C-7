@@ -49,7 +49,7 @@ int main(argc, argv)
 }
 
 int unsigned_scanf(p)
-	const unsigned *p;
+	unsigned *p;
 {
 	const int check = scanf("%u", p);
 	while (getchar() != '\n')
@@ -58,7 +58,7 @@ int unsigned_scanf(p)
 }
 
 int int_scanf(p)
-	const unsigned *p;
+	int *p;
 {
 	const int check = scanf("%d", p);
 	while (getchar() != '\n')

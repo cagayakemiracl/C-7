@@ -38,7 +38,7 @@ int main(argc, argv)
 }
 
 int unsigned_scanf(p)
-	const unsigned *p;
+	unsigned *p;
 {
 	const int check = scanf("%u", p);
 	while (getchar() != '\n')
