@@ -11,35 +11,44 @@
 /* このままでは汎用性が低い。scanfの実装を見て作り直す */
 int unsigned_scanf();
 
+void print_bit_shift();
+
 int main(argc, argv)
 	int argc;
 	char *argv[];
 {
 	unsigned num;
-    unsigned *p = &num;
+    const unsigned *p = &num;
 
 	TRY {
 		printf("Unsigned Number: ");
 		if(!unsigned_scanf(p)) THROW(NOT_NUM);
 	}
-	
-   	printf("*2 :%u :%u\n/2 :%u :%u\n", num << 1, num * 2, num >> 1, num / 2);
-	
+
+	print_bit_shift(num);
+ 	
 	CATCH(NOT_NUM, END) {
 		puts("You should enter a number!!");
+		return 1;
 	}
 	
-	FINALLY(END) {
-		return 0;
-	}
+	FINALLY(END) { }
+	
+	return 0;
 }
 
 int unsigned_scanf(p)
-	unsigned *p;
+	const unsigned *p;
 {
 	int check;
 	check = scanf("%u", p);
 	while (getchar() != '\n')
 		;
 	return check;
+}
+
+void print_bit_shift(num)
+	const unsigned num;
+{
+	printf("*2 :%u :%u\n/2 :%u :%u\n", num << 1, num * 2, num >> 1, num / 2);
 }

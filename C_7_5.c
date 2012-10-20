@@ -12,34 +12,44 @@
 /* このままでは汎用性が低い。scanfの実装を見て作り直す */
 int unsigned_scanf();
 
+void print_unsigned_over();
+
 int main(argc, argv)
 	int argc;
 	char *argv[];
 {
-	unsigned num = UINT_MAX, sum;
-	unsigned *p = &sum;
+	const unsigned num = UINT_MAX;
+	unsigned sum;
+	const unsigned *p = &sum;
 	
 	TRY {
 		if(!unsigned_scanf(p)) THROW(NOT_NUM);
 	}
-	
-	printf("%u\n%u\n", num, num + sum);
+
+	print_unsigned_over(num, sum);
 
 	CATCH(NOT_NUM, END) {
 		puts("You should enter a number!!");
+		return 1;
 	}
 	
-	FINALLY(END) {
-		return 0;
-	}
+	FINALLY(END) { }
+
+	return 0;
 }
 
 int unsigned_scanf(p)
-	unsigned *p;
+	const unsigned *p;
 {
 	int check;
 	check = scanf("%u", p);
 	while (getchar() != '\n')
 		;
 	return check;
+}
+
+void print_unsigned_over(num, sum)
+	const unsigned num, sum;
+{
+	printf("%u\n%u\n", num, num + sum);
 }

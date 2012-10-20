@@ -23,9 +23,9 @@ int main(argc, argv)
 	char *argv[];
 {
 	int bit;
-	int *q = &bit;
+	const int *q = &bit;
 	unsigned num;
-	unsigned *p = &num;
+	const unsigned *p = &num;
 
 	TRY {
 		printf("Unsigned Number: ");
@@ -40,15 +40,16 @@ int main(argc, argv)
 
 	CATCH(NOT_NUM, END) {
 			puts("You should enter a number!!");
+			return 1;
 	}
 	
-	FINALLY(END) {
-		return 0;
-	}
+	FINALLY(END) { }
+
+	return 0;
 }
 
 int unsigned_scanf(p)
-	unsigned *p;
+	const unsigned *p;
 {
 	int check;
 	check = scanf("%u", p);
@@ -58,7 +59,7 @@ int unsigned_scanf(p)
 }
 
 int int_scanf(p)
-	unsigned *p;
+	const unsigned *p;
 {
 	int check;
 	check = scanf("%d", p);
@@ -82,7 +83,7 @@ int unsigned_bits(void)
 }
 
 void print_bits(x)
-	unsigned x;
+	const unsigned x;
 {
 	int i;
 	printf("0b");
@@ -92,14 +93,14 @@ void print_bits(x)
 }
 
 unsigned rrotate(x, n)
-	unsigned x;
+	const unsigned x;
 	int n;
 {
 	return x >> n | x << (unsigned_bits() - n);
 }
 
 unsigned lrotate(x, n)
-	unsigned x;
+	const unsigned x;
 	int n;
 {
 	return x << n | x >> (unsigned_bits() - n);

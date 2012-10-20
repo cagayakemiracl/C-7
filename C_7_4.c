@@ -27,9 +27,9 @@ int main(argc, argv)
 	char *argv[];
 {
 	int bit, sum;
-	int *q = &bit, *r = &sum;
+	const int *q = &bit, *r = &sum;
 	unsigned num;
-	unsigned *p = &num;
+	const unsigned *p = &num;
 	
 	TRY {
 		printf("Unsigned Number: ");
@@ -47,15 +47,16 @@ int main(argc, argv)
 	
 	CATCH(NOT_NUM, END) {
 		puts("You should enter a number!!");
+		return 1;
 	}
 	
-	FINALLY(END) {
-		return 0;
-	}
+	FINALLY(END) { }
+
+	return 0;
 }
 
 int unsigned_scanf(p)
-	unsigned *p;
+	const unsigned *p;
 {
 	int check;
 	check = scanf("%u", p);
@@ -65,7 +66,7 @@ int unsigned_scanf(p)
 }
 
 int int_scanf(p)
-	unsigned *p;
+	const unsigned *p;
 {
 	int check;
 	check = scanf("%d", p);
@@ -89,7 +90,7 @@ int unsigned_bits(void)
 }
 
 void print_bits(x)
-	unsigned x;
+	const unsigned x;
 {
 	int i;
 	printf("0b");
@@ -99,28 +100,28 @@ void print_bits(x)
 }
 
 unsigned set(x, pos)
-	unsigned x;
+	const unsigned x;
 	int pos;
 {
 	return x | 1 << --pos;
 }
 
 unsigned reset(x, pos)
-	unsigned x;
+	const unsigned x;
 	int pos;
 {
 	return set(x, pos) ^ 1 << --pos;
 }
 
 unsigned inverse(x, pos)
-	unsigned x;
+	const unsigned x;
 	int pos;
 {
 	return x ^ 1 << --pos;
 }
 
 unsigned set_n(x, pos, n)
-	unsigned x;
+	const unsigned x;
 	int pos, n;
 {
 	if (n) 
@@ -130,7 +131,7 @@ unsigned set_n(x, pos, n)
 }
 
 unsigned reset_n(x, pos, n)
-	unsigned x;
+	const unsigned x;
 	int pos, n;
 {
 	if (n)
@@ -140,7 +141,7 @@ unsigned reset_n(x, pos, n)
 }
 
 unsigned inverse_n(x, pos, n)
-	unsigned x;
+	const unsigned x;
 	int pos, n;
 {
 	if (n)
