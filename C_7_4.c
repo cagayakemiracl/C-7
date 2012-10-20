@@ -58,8 +58,7 @@ int main(argc, argv)
 int unsigned_scanf(p)
 	const unsigned *p;
 {
-	int check;
-	check = scanf("%u", p);
+	const int check = scanf("%u", p);
 	while (getchar() != '\n')
 		;
 	return check;
@@ -68,8 +67,7 @@ int unsigned_scanf(p)
 int int_scanf(p)
 	const unsigned *p;
 {
-	int check;
-	check = scanf("%d", p);
+	const int check = scanf("%d", p);
 	while (getchar() != '\n')
 		;
 	return check;
